@@ -3,7 +3,6 @@ import { useCheckout } from "../contexts/CheckoutContext";
 import { useProduct } from "../contexts/ProductContext";
 import Sidebar from "../components/Sidebar";
 import { useNavigate } from "react-router-dom";
-import React from "react";
 
 const Employee = () => {
   const { getAllCheckouts } = useCheckout();
