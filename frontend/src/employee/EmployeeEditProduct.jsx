@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useProduct } from "../contexts/ProductContext";
 import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
-import { useNavigate } from "react-router-dom";
 
 const EmployeeEditProduct = () => {
   const { productId } = useParams();
