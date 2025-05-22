@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useProduct } from "../contexts/ProductContext";
 import Sidebar from "../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 const EmployeeAddProduct = () => {
   const { createProduct } = useProduct();
@@ -11,6 +12,18 @@ const EmployeeAddProduct = () => {
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      sessionStorage.getItem("token") === null ||
+      sessionStorage.getItem("token") === "" ||
+      sessionStorage.getItem("role") === null ||
+      sessionStorage.getItem("role") !== "EMPLOYEE"
+    ) {
+      navigate("/login");
+    }
+  }, []);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useProduct } from "../contexts/ProductContext";
 import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 const EmployeeEditProduct = () => {
   const { productId } = useParams();
@@ -14,6 +15,17 @@ const EmployeeEditProduct = () => {
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      sessionStorage.getItem("token") === null ||
+      sessionStorage.getItem("token") === "" ||
+      sessionStorage.getItem("role") === null ||
+      sessionStorage.getItem("role") !== "EMPLOYEE"
+    ) {
+      navigate("/login");
+    }
+  }, []);
 
   useEffect(() => {
     const fetchProduct = async () => {

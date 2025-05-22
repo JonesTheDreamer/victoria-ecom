@@ -3,6 +3,7 @@ import { useCheckout } from "../contexts/CheckoutContext";
 import { useProduct } from "../contexts/ProductContext";
 import Sidebar from "../components/Sidebar";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const Employee = () => {
   const { getAllCheckouts } = useCheckout();
@@ -12,6 +13,17 @@ const Employee = () => {
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [totalItemsSold, setTotalItemsSold] = useState(0);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      sessionStorage.getItem("token") === null ||
+      sessionStorage.getItem("token") === "" ||
+      sessionStorage.getItem("role") === null ||
+      sessionStorage.getItem("role") !== "EMPLOYEE"
+    ) {
+      navigate("/login");
+    }
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
